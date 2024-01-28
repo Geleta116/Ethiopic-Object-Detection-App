@@ -1,0 +1,1 @@
+ /home/geleta/Desktop/Ethiopic-Object-Detection-App/UI/.dart_tool/flutter_build/a9897d8c5936d1829ecf16b566862650/native_assets.yaml: 
