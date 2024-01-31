@@ -17,9 +17,21 @@ The ceremony itself symbolizes hospitality, community, and social connection in 
 The intricate designs on the Jebena often reflect the artisan's creativity and are passed down 
 through generations, adding a sense of history to each piece. Jebenas are cherished not only for 
 their functional use but also as beautiful artifacts representing Ethiopian heritage.""",
-    "materials": ["clay", "leather", "woven grass"],
+    "materials": ["clay", "Metal"],
     "origin": "Ethiopia",
-    "colors": ["brown", "black", "white"],
+    "colors": ["brown", "black", "white", "Red"],
+    "Images": [
+      "jebena.png",
+      "Jebena(116).jpeg",
+      "Jebena(129).jpeg",
+      "Jebena(130).jpeg",
+      "Jebena(137).jpeg",
+      "Jebena(152).jpeg",
+      "Jebena(167).jpeg",
+      "Jebena(169).jpeg",
+      "Jebena(87).jpeg",
+
+    ]
   },
   "Sini": {
     "image": "assets/Sini.jpg",
@@ -37,9 +49,20 @@ that goes into its creation. Artisans meticulously carve or decorate Sinis with 
 geometric patterns, or scenes inspired by Ethiopian life. The use of locally sourced materials and 
 techniques passed down through generations adds a unique touch to each Sini, making it a symbol 
 of cultural richness and artistry.""",
-    "materials": ["wood", "metal", "woven materials"],
+    "materials": ["clay", "Ceramic", "woven materials"],
     "origin": "Ethiopia",
-    "colors": ["various"],
+    "colors": ["white", "brown", "black"],
+    "Images": [
+      "Sini.jpg",
+      "Sini6.jpeg",
+      "Sini13.jpeg",
+      "Sini22.jpeg",
+      "Sini39.jpeg",
+      "Sini41.jpeg",
+      "Sini64.jpeg",
+      "Sini84.jpeg",
+      "Sini15.jpeg"
+    ]
   },
 };
 
@@ -151,7 +174,7 @@ class ProductItemScreen extends StatelessWidget {
                 Text(
                   objectName,
                   style: TextStyle(
-                    color: Colors.orange[800],
+                    color: Color.fromARGB(255, 7, 4, 131),
                     fontSize: 42,
                   ),
                 ),
@@ -168,7 +191,7 @@ class ProductItemScreen extends StatelessWidget {
                 Text(
                   "Materials",
                   style: TextStyle(
-                    color: Colors.orange[800],
+                    color: Color.fromARGB(255, 7, 4, 131),
                     fontSize: 18,
                   ),
                 ).animate().fade(duration: 1000.ms).slideX(),
@@ -187,7 +210,7 @@ class ProductItemScreen extends StatelessWidget {
                 Text(
                   "Origin",
                   style: TextStyle(
-                    color: Colors.orange[800],
+                    color: Color.fromARGB(255, 7, 4, 131),
                     fontSize: 18,
                   ),
                 ).animate().fade(duration: 1000.ms).slideX(),
@@ -201,18 +224,46 @@ class ProductItemScreen extends StatelessWidget {
                 Text(
                   "Colors",
                   style: TextStyle(
-                    color: Colors.orange[800],
+                    color: Color.fromARGB(255, 7, 4, 131),
                     fontSize: 18,
                   ),
                 ).animate().fade(duration: 1000.ms).slideX(),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: selectedObject["colors"].map<Widget>((material) {
+                  children: selectedObject["colors"].map<Widget>((color) {
                     return Text(
-                      "- $material",
+                      "- $color",
                       style: Theme.of(context).textTheme.bodyMedium,
                     );
                   }).toList(),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  "Images",
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 7, 4, 131),
+                    fontSize: 18,
+                  ),
+                ).animate().fade(duration: 1000.ms).slideX(),
+                SizedBox(
+                  height: 10,
+                ),
+                GridView.builder(
+                  shrinkWrap: true,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                  ),
+                  itemCount: selectedObject["Images"].length,
+                  itemBuilder: (context, index) {
+                    return Image.asset(
+                      "assets/${selectedObject["Images"][index]}",
+                      fit: BoxFit.cover,
+                    );
+                  },
                 ),
               ],
             ).animate().fade(duration: 1000.ms).slideX(),

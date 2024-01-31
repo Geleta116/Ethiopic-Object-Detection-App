@@ -43,72 +43,83 @@ class _DetectionPageState extends State<DetectionPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Detection'),
-      ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FutureBuilder<List<DetectedObject>>(
-                future: results,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return CircularProgressIndicator();
-                  } else if (snapshot.hasError) {
-                    return Text('Error: ${snapshot.error}');
-                  } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-                    // Display the processed image
-                    return Column(
-                      children: [
-                        Container(
-                          height:
-                              300.0, // Adjust the height based on your needs
-                          child: Image.network(
-                            'http://192.168.212.126:5000/get_image/$newImageFilename',
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                        const SizedBox(height: 20.0),
-                        Text(
-                          'Objects Detected:',
-                          style: TextStyle(fontSize: 18),
-                        ),
-                        // Use a ListView.builder for the detected objects
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: List.generate(
-                              snapshot.data!.length,
-                              (index) {
-                                var object = snapshot.data![index];
-                                return GestureDetector(
-                                  onTap: () {
-                                    navigateToProductItemScreen(object.name);
-                                  },
-                                  child: buildScrollableCard(object),
-                                );
-                              },
+    return Container(
+      decoration: BoxDecoration(color: Colors.white),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Detect',
+          style: TextStyle(
+            color: Colors.white,
+          ),),
+          backgroundColor: Colors.black,
+          shadowColor: Colors.transparent,
+        ),
+        body: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FutureBuilder<List<DetectedObject>>(
+                  future: results,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return CircularProgressIndicator(
+                        color: Colors.black,
+
+                      );
+                    } else if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+                      // Display the processed image
+                      return Column(
+                        children: [
+                          Container(
+                            height:
+                                300.0, // Adjust the height based on your needs
+                            child: Image.network(
+                              'http://192.168.212.126:5000/get_image/$newImageFilename',
+                              fit: BoxFit.contain,
                             ),
                           ),
-                        ),
-                      ],
-                    );
-                  } else {
-                    return Text('No image URL available');
-                  }
-                },
-              ),
-              const SizedBox(height: 20.0),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text('Continue'),
-              ),
-            ],
+                          const SizedBox(height: 20.0),
+                          Text(
+                            'Objects Detected:',
+                            style: TextStyle(fontSize: 18),
+                          ),
+                          // Use a ListView.builder for the detected objects
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: List.generate(
+                                snapshot.data!.length,
+                                (index) {
+                                  var object = snapshot.data![index];
+                                  return GestureDetector(
+                                    onTap: () {
+                                      navigateToProductItemScreen(object.name);
+                                    },
+                                    child: buildScrollableCard(object),
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    } else {
+                      return Text('Did not Detect Ethiopic Objects');
+                    }
+                  },
+                ),
+                const SizedBox(height: 20.0),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('Continue'),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -211,10 +222,10 @@ class _DetectionPageState extends State<DetectionPage> {
 
 
       if (response.statusCode == 200) {
-        print("success 1");
+       
         var responseData = await response.stream.bytesToString();
         Map<String, dynamic> result = json.decode(responseData);
-        print("success 2");
+      
         newImageFilename = result['image_path']
             as String; // Receive the filename from the server
         List<String> namesList = (result['names'] as List).cast<String>();

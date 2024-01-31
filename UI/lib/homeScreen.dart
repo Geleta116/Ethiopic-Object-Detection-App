@@ -22,66 +22,70 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text(
           'Ethiopic Artifacts Detector',
           style: TextStyle(
-            fontSize: 20.0,
-            fontWeight: FontWeight.bold,
+            fontSize: 25.0,
+            fontWeight: FontWeight.w900,
+            color: Colors.white,
           ),
         ),
-        backgroundColor: Colors.orange[800],
+        backgroundColor: Colors.black,
         centerTitle: true,
         elevation: 4.0,
       ),
-      body: Center(
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 20.0,
-            ),
-            imageFile == null
-                ? Image.asset(
-                    'assets/jebena.png',
-                    width: 200,
-                    height: 400,
-                    // Optional color
-                  )
-                : ClipRRect(
-                    borderRadius: BorderRadius.circular(150.0),
-                    child: Image.file(
-                      imageFile!,
-                      height: 300.0,
-                      width: 300.0,
-                      fit: BoxFit.fill,
-                    )),
-            const SizedBox(
-              height: 20.0,
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                Map<Permission, PermissionStatus> statuses = await [
-                  Permission.storage,
-                  Permission.camera,
-                ].request();
-                if (
-                    // statuses[Permission.storage]!.isGranted &&
-                    statuses[Permission.camera]!.isGranted) {
-                  showImagePicker(context);
-                } else {
-                  print('No permission provided');
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.white,
-                backgroundColor: Colors.orange[800],
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+      body: Container(
+        decoration: BoxDecoration(color: Color.fromARGB(255, 252, 250, 250)),
+        child: Center(
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 20.0,
+              ),
+              imageFile == null
+                  ? Image.asset(
+                      'assets/Ethiopia.png',
+                      width: 400,
+                      height: 600,
+                      // Optional color
+                    )
+                  : ClipRRect(
+                      borderRadius: BorderRadius.circular(150.0),
+                      child: Image.file(
+                        imageFile!,
+                        height: 300.0,
+                        width: 300.0,
+                        fit: BoxFit.fill,
+                      )),
+              const SizedBox(
+                height: 20.0,
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  Map<Permission, PermissionStatus> statuses = await [
+                    Permission.storage,
+                    Permission.camera,
+                  ].request();
+                  if (
+                      // statuses[Permission.storage]!.isGranted &&
+                      statuses[Permission.camera]!.isGranted) {
+                    showImagePicker(context);
+                  } else {
+                    print('No permission provided');
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.black,
+                  // backgroundColor: Colors.orange[800],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                 ),
-                padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                child: Text(
+                  'Detect',
+                  style: TextStyle(fontSize: 18),
+                ),
               ),
-              child: Text(
-                'Select Image',
-                style: TextStyle(fontSize: 18),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
