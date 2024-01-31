@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.orange[800],
         centerTitle: true,
         elevation: 4.0,
       ),
@@ -61,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Permission.camera,
                 ].request();
                 if (
-                  // statuses[Permission.storage]!.isGranted &&
+                    // statuses[Permission.storage]!.isGranted &&
                     statuses[Permission.camera]!.isGranted) {
                   showImagePicker(context);
                 } else {
@@ -70,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,
-                backgroundColor: Colors.blue,
+                backgroundColor: Colors.orange[800],
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
