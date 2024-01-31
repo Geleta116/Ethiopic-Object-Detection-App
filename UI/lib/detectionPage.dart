@@ -197,8 +197,7 @@ class _DetectionPageState extends State<DetectionPage> {
         'POST',
         Uri.parse('http://192.168.212.126:5000'),
       );
-      print("has posted");
-
+     
       File rotatedImage = await rotateImage(imageFile, 360);
 
       request.files.add(
@@ -207,8 +206,9 @@ class _DetectionPageState extends State<DetectionPage> {
           rotatedImage.path,
         ),
       );
-      print("has added file");
       var response = await request.send();
+
+
 
       if (response.statusCode == 200) {
         print("success 1");
